@@ -109,7 +109,13 @@ class LRU
 
         void put(int key, int data);
         int get(int key);
+        void print();
 };
+void LRU:: print()
+{
+    cout<<"Order of node in the LRU is :"<<endl;
+    ll.print();
+}
 
 //TODO deleteGivenNode
 void DLL:: deleteGivenNode(Node **keynode)
@@ -231,17 +237,26 @@ int main()
     LRU lru(3);
     lru.put(1,10);
     lru.put(2,20);
-    lru.put(3,30);
-    cout<<lru.get(1)<<endl;
-    lru.put(3,30);
-    lru.get(2);
-    // lru.put(5,50);
-    // cout<<lru.get(3)<<endl;
-    // cout<<lru.get(4)<<endl;
-    // lru.put(6,60);
-    // cout<<lru.get(1)<<endl;
-    // cout<<lru.get(5)<<endl;
-
+    lru.put(3,30); //3,30  2,20  1,10
+    lru.print();
+    cout<<lru.get(1)<<endl; // returns 10 redorders 1,10 3,20 2,20
+    lru.print();
+    lru.put(3,30);  //3,30 1,10 2,20
+    lru.print();
+    cout<< lru.get(2)<<endl; //returns 20 reorders 2,20 3,30 1,10
+    lru.print();
+    lru.put(5,50); // 50 20 30
+    lru.print(); 
+    cout<<lru.get(3)<<endl;
+    lru.print(); //30 50 20
+    cout<<lru.get(4)<<endl; //return -1 as key doesn't exists
+    lru.print(); //30 50 20
+    lru.put(6,60);
+    lru.print(); // 60 30 50
+    cout<<lru.get(1)<<endl; //returns -1
+    lru.print();
+    cout<<lru.get(5)<<endl; //return 50 reorders 50 60 30
+    lru.print();
     return 0;
 
 }
